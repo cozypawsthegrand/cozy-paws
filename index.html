@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cozy Paws at The Grand</title>
+  <meta name="description" content="Luxury, home-based dog care in The Grand: boarding, daycare, walks, grooming lite, and memberships." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Brand Palette (from your reference) ===== */
+    :root{
+      --orange:#c86a3c;   /* warm accent */
+      --olive:#747760;    /* primary text */
+      --sage:#a6a89c;     /* subtle text / borders */
+      --beige:#c7af98;    /* soft background */
+      --stone:#cfccc8;    /* light surfaces */
+      --brown:#8e6a4b;    /* deep accent */
+      --white:#ffffff;
+      --black:#1d1d1b;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius-lg:28px;
+      --max:1200px;
+      --header-h:74px;
+    }
+    /* ===== Base ===== */
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--olive);
+      background:linear-gradient(180deg, #fff 0%, var(--beige) 140%);
+    }
+    img{max-width:100%; height:auto;}
+    a{color:inherit}
+
+    /* ===== Header / Nav ===== */
+    header{
+      position:sticky; top:0; z-index:50; height:var(--header-h);
+      backdrop-filter:saturate(180%) blur(8px);
+      background:rgba(255,255,255,.86);
+      border-bottom:1px solid #ecebea;
+    }
+    .nav-wrap{max-width:var(--max); margin:0 auto; height:100%; display:flex; align-items:center; gap:18px; padding:0 18px;}
+    .logo{display:flex; align-items:center; gap:12px;}
+    .logo img{height:48px; width:auto;}
+    .nav{margin-left:auto; display:flex; align-items:center; gap:22px;}
+    .nav a{font-weight:600; text-decoration:none; padding:10px 12px; border-radius:10px;}
+    .nav a:hover{background:var(--stone)}
+    .hamburger{display:none; margin-left:auto; background:none; border:none; font-size:28px;}
+
+    /* Mobile menu */
+    .mobile{display:none; position:fixed; inset:0; background:rgba(0,0,0,.45);} 
+    .mobile .sheet{background:var(--white); position:absolute; right:0; top:0; width:min(84vw,360px); height:100%; padding:22px; box-shadow:var(--shadow);} 
+    .mobile a{display:block; padding:14px 10px; border-radius:12px; font-weight:600;}
+    .mobile a:hover{background:var(--stone)}
+
+    /* ===== Sections ===== */
+    section{padding: clamp(56px, 7vw, 100px) 18px;}
+    .container{max-width:var(--max); margin:0 auto;}
+    h1,h2,h3{color:var(--brown); margin:0 0 12px}
+    h1{font-size: clamp(32px, 5vw, 56px); line-height:1.1}
+    h2{font-size: clamp(24px, 3.4vw, 36px)}
+    p{line-height:1.7}
+    .muted{color:#6b6f69}
+
+    /* ===== Hero ===== */
+    .hero{display:grid; grid-template-columns:1fr; gap:28px; align-items:center;}
+    .hero-card{background:var(--white); border-radius:var(--radius-lg); padding:28px; box-shadow:var(--shadow); border:1px solid #eee;}
+    .tag{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; background:var(--stone); border-radius:999px; font-weight:700; color:var(--brown)}
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .btn{appearance:none; border:none; border-radius:14px; padding:12px 18px; font-weight:700; cursor:pointer; transition:.25s transform, .25s box-shadow, .25s background;}
+    .btn.primary{background:var(--orange); color:white; box-shadow:0 8px 18px rgba(200,106,60,.25)}
+    .btn.primary:hover{transform:translateY(-2px)}
+    .btn.ghost{background:transparent; border:2px solid var(--brown); color:var(--brown)}
+
+    .hero-visual{position:relative; aspect-ratio: 16/10; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow);} 
+    .hero-visual img{width:100%; height:100%; object-fit:cover;}
+    .badge{position:absolute; left:18px; bottom:18px; background:var(--brown); color:white; padding:8px 12px; border-radius:12px; font-weight:700}
+
+    /* ===== Cards / Grids ===== */
+    .grid{display:grid; grid-template-columns:1fr; gap:18px}
+    @media(min-width:768px){
+      .hero{grid-template-columns:1.1fr .9fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(min-width:1024px){
+      .grid-3{grid-template-columns:repeat(3,1fr)}
+    }
+    .card{background:var(--white); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow); border:1px solid #ecebea; transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.12)}
+
+    .pill{display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700; background:var(--sage); color:white; letter-spacing:.4px}
+    .price{font-size:22px; font-weight:800; color:var(--orange)}
+    ul{margin:10px 0 0 1.2rem}
+    li{margin:.25rem 0}
+
+    /* Accordion */
+    details{border:1px solid #ecebea; border-radius:14px; background:var(--white); box-shadow:var(--shadow)}
+    details+details{margin-top:14px}
+    summary{cursor:pointer; list-style:none; padding:18px 20px; font-weight:800; color:var(--brown)}
+    summary::-webkit-details-marker{display:none}
+    details .content{padding:0 20px 18px}
+
+    /* ===== Policies ===== */
+    .policy{background:var(--stone); border-radius:var(--radius); padding:18px;}
+
+    /* ===== Contact ===== */
+    .contact{display:grid; gap:18px}
+    .contact form{background:var(--white); border:1px solid #ecebea; border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)}
+    label{font-weight:700}
+    input, textarea{width:100%; padding:12px; border:1px solid #e0dedb; border-radius:12px; font:inherit}
+    textarea{min-height:120px}
+
+    /* ===== Footer ===== */
+    footer{background:var(--brown); color:white;}
+    footer .inner{max-width:var(--max); margin:0 auto; padding:32px 18px; display:grid; gap:10px}
+
+    /* ===== Reveal on scroll ===== */
+    .reveal{opacity:0; transform: translateY(14px); transition: .6s ease}
+    .reveal.visible{opacity:1; transform:none}
+
+    /* Back-to-top */
+    #topBtn{position:fixed; right:16px; bottom:16px; padding:12px 14px; border-radius:999px; border:none; background:var(--orange); color:#fff; box-shadow:0 6px 16px rgba(200,106,60,.3); cursor:pointer; display:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-wrap">
+      <a class="logo" href="#home" aria-label="Cozy Paws Home">
+        <!-- Save your logo file at /assets/logo.png -->
+        <img src="assets/logo.png" alt="Cozy Paws at The Grand logo" />
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#policies">Policies</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="hamburger" id="menuBtn" aria-label="Open Menu">☰</button>
+    </div>
+    <div class="mobile" id="mobile">
+      <div class="sheet">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#policies">Policies</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <!-- HERO -->
+    <section class="container hero">
+      <div class="hero-card reveal">
+        <span class="tag">Luxury • Quality • Care</span>
+        <h1>Cozy Paws at The Grand</h1>
+        <p class="muted">Home-based, boutique pet care that puts <strong>quality over quantity</strong>. We welcome a small number of pups so yours gets the attention they deserve.</p>
+        <div class="cta">
+          <a href="#services"><button class="btn primary">Explore Services</button></a>
+          <a href="#contact" class="btn ghost">Book a Meet &amp; Greet</a>
+        </div>
+      </div>
+      <div class="hero-visual reveal" aria-hidden="true">
+        <!-- Replace with your own image in /assets/hero.jpg -->
+        <img src="assets/hero.jpg" alt="Happy dog lounging in a cozy home" />
+        <span class="badge">Insured by Lemonade</span>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="container">
+      <h2 class="reveal">About Us</h2>
+      <p class="reveal muted">We’re a stay-at-home, family-run service offering tailored care from a spacious apartment in The Grand. Registered as <strong>4Four LLC</strong> dba <strong>Cozy Paws at The Grand</strong>, and fully insured through <strong>Lemonade</strong>, we deliver safe, loving care and clear communication with photo/video updates.</p>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="container">
+      <h2 class="reveal">Services &amp; Pricing</h2>
+
+      <div class="grid grid-3">
+        <div class="card reveal">
+          <span class="pill">Overnight Boarding</span>
+          <h3>Sleepover Snuggle (Basic)</h3>
+          <p class="price">$50/night</p>
+          <ul>
+            <li>Parent drop-off after 8:00 AM &amp; pick-up before 10:00 AM</li>
+            <li>Daily photos of your dog enjoying their stay</li>
+            <li>Cozy blanket provided</li>
+            <li>Fresh water &amp; feeding per your schedule</li>
+            <li>Indoor/outdoor playtime</li>
+            <li>Two walks per day</li>
+            <li>Evening snuggle time before bed</li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <span class="pill">Overnight Boarding</span>
+          <h3>VIP Tail‑Wagger (Gold)</h3>
+          <p class="price">$65/night</p>
+          <ul>
+            <li><strong>No Worries, Drop &amp; Go:</strong> flexible drop‑off &amp; pick‑up</li>
+            <li>Comfy orthopedic bed</li>
+            <li>Daily <strong>videos and photos</strong></li>
+            <li>Walks with provided leash</li>
+            <li>Organic treats (parent‑approved)</li>
+            <li>Waste bags &amp; clean‑up included</li>
+            <li>Dedicated feeding &amp; fresh bowls</li>
+            <li>Three daily walks/play sessions</li>
+            <li>Calming music during naps</li>
+            <li>Bedtime treat &amp; tuck‑in</li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <span class="pill">Overnight Boarding</span>
+          <h3>Royal Paws Retreat (Platinum)</h3>
+          <p class="price">$90/night</p>
+          <ul>
+            <li><em>Everything in Gold</em> plus:</li>
+            <li>Daily FaceTime/video call (5–10 min)</li>
+            <li>Pick‑up &amp; drop‑off within 10 miles</li>
+            <li>One refreshing doggy bath before going home</li>
+            <li>Personalized welcome gift (toy &amp; treats)</li>
+            <li>Extended evening play session</li>
+            <li>Gentle paw massage for relaxation</li>
+            <li>Complimentary post‑stay report card with photos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:22px">
+        <div class="card reveal">
+          <span class="pill">Daycare</span>
+          <h3>Dog Daycare</h3>
+          <p class="price">Half‑Day (up to 4 hrs) – $25<br/>Full‑Day (4–8 hrs) – $40</p>
+          <p class="muted">Includes indoor/outdoor play, socialization, 1–2 walks, and cozy rest time.</p>
+          <details>
+            <summary>Add‑Ons</summary>
+            <div class="content">
+              <ul>
+                <li>Puppy Enrichment Session – $10</li>
+                <li>Extra 30‑min Walk – $15</li>
+                <li>Bath Before Pickup – $20 (small/med)</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+        <div class="card reveal">
+          <span class="pill">Walking</span>
+          <h3>Dog Walking</h3>
+          <p class="price">30 min – $20 • 60 min – $35</p>
+          <p class="muted">Includes water refill, waste pick‑up, and a tail‑wag report.</p>
+          <details>
+            <summary>Add‑Ons</summary>
+            <div class="content">
+              <ul>
+                <li>Photo/Video Update – $5</li>
+                <li>Treat Break – $3</li>
+                <li>Paw Wipe &amp; Brush – $8</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:22px">
+        <div class="card reveal">
+          <span class="pill">Grooming Lite</span>
+          <h3>Dog Bathing</h3>
+          <p class="price">Basic Bath (Small/Med) – $20</p>
+          <details>
+            <summary>Add‑Ons</summary>
+            <div class="content">
+              <ul>
+                <li>Medicated Shampoo – $8</li>
+                <li>Nail Trim – $10</li>
+                <li>De‑shedding Brush Out – $15</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+        <div class="card reveal">
+          <span class="pill">Puppy Care</span>
+          <h3>Drop‑In Visits</h3>
+          <p class="price">20 min – $20</p>
+          <p class="muted">Potty break, feeding, playtime, and cuddle care.</p>
+          <details>
+            <summary>Add‑Ons</summary>
+            <div class="content">
+              <ul>
+                <li>Extra 10 min play – $5</li>
+                <li>Training Reinforcement – $8</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="card reveal" style="margin-top:22px">
+        <span class="pill">Membership</span>
+        <h3>The Dog Walk Club</h3>
+        <p class="price">$200/month</p>
+        <ul>
+          <li>20 walks per month (30 min each) – use them however you like</li>
+          <li>10% discount on all other Cozy Paws services</li>
+          <li>6‑month contract for guaranteed savings &amp; consistent care</li>
+          <li>Flexible scheduling: use multiple walks in a day or space them out</li>
+          <li>Priority booking for boarding, daycare, and grooming</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- POLICIES -->
+    <section id="policies" class="container">
+      <h2 class="reveal">Terms, Policies &amp; Insurance</h2>
+      <div class="policy reveal">
+        <h3>Business Information</h3>
+        <p>Cozy Paws at The Grand is operated by <strong>4Four LLC</strong> (dba Cozy Paws at The Grand). We carry general liability and pet care coverage through <strong>Lemonade Insurance</strong> for property damage, injury, and pet‑related incidents occurring during scheduled services.</p>
+      </div>
+
+      <div class="policy reveal">
+        <h3>Service Agreement</h3>
+        <ul>
+          <li>All pets must be current on vaccinations and free of contagious illness/parasites.</li>
+          <li>Bookings are confirmed in writing (text/email/booking platform).</li>
+          <li>Disclose special needs, medications, or behavioral notes prior to service.</li>
+        </ul>
+      </div>
+
+      <div class="policy reveal">
+        <h3>Payments</h3>
+        <ul>
+          <li>Payment is due at booking to reserve dates.</li>
+          <li>Accepted methods: card, digital wallet, or other methods as listed in your invoice.</li>
+        </ul>
+      </div>
+
+      <div class="policy reveal">
+        <h3>Cancellation &amp; Refunds</h3>
+        <p><strong>Walks, Daycare, Bathing, Drop‑Ins:</strong> Cancel &gt;24 hours before your appointment for a full credit; &lt;24 hours is non‑refundable.</p>
+        <p><strong>Boarding:</strong> Cancel &gt;7 days before start for a full credit; 3–6 days prior = 50% credit; within 48 hours is non‑refundable.</p>
+        <p><strong>No‑Shows:</strong> Forfeit the booking fee.</p>
+        <p><strong>Refunds:</strong> Issued only if Cozy Paws must cancel due to unforeseen circumstances. Credits are valid for 12 months.</p>
+      </div>
+
+      <div class="policy reveal">
+        <h3>Liability</h3>
+        <ul>
+          <li>We prioritize safety and care, but cannot be responsible for conditions beyond reasonable control.</li>
+          <li>In emergencies, we will contact you immediately and may transport your pet to the nearest veterinarian.</li>
+          <li>Pets are cared for at the owner’s risk.</li>
+          <li><strong>Owners are financially responsible</strong> for any damages, repairs, or replacements caused by their pet that exceed <strong>$100</strong> in value (including property, bedding/equipment, or other pets’ belongings).</li>
+        </ul>
+      </div>
+
+      <div class="policy reveal">
+        <h3>Photography &amp; Updates</h3>
+        <p>We love to share how your pup is doing! By using our services you consent to photo/video updates and marketing materials, unless you opt out in writing.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="container">
+      <h2 class="reveal">Contact &amp; Booking</h2>
+      <div class="contact">
+        <form class="reveal" onsubmit="event.preventDefault(); window.location='mailto:info@cozypawsgrand.com?subject=Booking%20Request&body=Name:%0D%0APhone:%0D%0APet%20Name:%0D%0AService%20Requested:%0D%0ADates:%0D%0ANotes:';">
+          <div style="display:grid; gap:12px; grid-template-columns:1fr 1fr;">
+            <div><label for="name">Name</label><input id="name" required placeholder="Your full name"/></div>
+            <div><label for="email">Email</label><input id="email" type="email" required placeholder="you@example.com"/></div>
+            <div><label for="phone">Phone</label><input id="phone" placeholder="(555) 123‑4567"/></div>
+            <div><label for="service">Service</label><input id="service" placeholder="Boarding / Daycare / Walks..."/></div>
+          </div>
+          <div style="margin-top:12px"><label for="msg">Notes</label><textarea id="msg" placeholder="Tell us about your pup and preferred dates"></textarea></div>
+          <div class="cta"><button class="btn primary" type="submit">Email Booking Request</button><a class="btn ghost" href="tel:+15551234567">Call Us</a></div>
+        </form>
+        <div class="card reveal">
+          <h3>Follow &amp; See Our Pups</h3>
+          <p class="muted">Daily photos, videos, and stories.</p>
+          <p><strong>Instagram / Facebook:</strong> @CozyPawsAtTheGrand</p>
+          <p>Serving The Grand and nearby neighborhoods.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="inner">
+      <p>© <span id="year"></span> Cozy Paws at The Grand • Insured by Lemonade • 4Four LLC (DBA)</p>
+      <p style="opacity:.8">This is a static site hosted on GitHub Pages.</p>
+    </div>
+  </footer>
+
+  <button id="topBtn" aria-label="Back to top">↑</button>
+
+  <script>
+  /*
+    Wrap all JS in an IIFE with a one-time guard so if this script
+    is injected/executed twice (common in live previews), we don't
+    redeclare const/let variables like `mq` and throw duplicate errors.
+  */
+  (function(){
+    if (window.__cozyPawsInitialized) return; // one-time guard
+    window.__cozyPawsInitialized = true;
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobile = document.getElementById('mobile');
+    const nav = document.querySelector('.nav');
+    const mq = window.matchMedia('(max-width: 900px)');
+
+    function syncMenu(){
+      if (!menuBtn || !nav || !mobile) return;
+      if(mq.matches){ menuBtn.style.display='block'; nav.style.display='none'; }
+      else{ menuBtn.style.display='none'; nav.style.display='flex'; mobile.style.display='none'; }
+    }
+    syncMenu();
+    window.addEventListener('resize', syncMenu);
+    if(menuBtn){ menuBtn.addEventListener('click', ()=> mobile.style.display = 'block'); }
+    if(mobile){ mobile.addEventListener('click', (e)=>{ if(e.target===mobile) mobile.style.display='none'; }); }
+
+    // Smooth scroll offset for sticky header
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id && id.length>1){
+          const el = document.querySelector(id);
+          if(!el) return;
+          e.preventDefault();
+          const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h'))||74;
+          const y = el.getBoundingClientRect().top + window.scrollY - (headerH + 10);
+          window.scrollTo({top:y, behavior:'smooth'});
+          if(mobile) mobile.style.display='none';
+        }
+      });
+    });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target);} })
+    }, {threshold:.14});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Back to top button
+    const topBtn = document.getElementById('topBtn');
+    window.addEventListener('scroll', ()=>{ if(topBtn) topBtn.style.display = window.scrollY>700 ? 'block' : 'none'; });
+    if(topBtn){ topBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'})); }
+
+    // Year
+    const yEl = document.getElementById('year');
+    if(yEl) yEl.textContent = new Date().getFullYear();
+
+    // \u2728 Lightweight UI checks ("tests") logged in console
+    (function runSmokeTests(){
+      const tests = [];
+      const assert = (name, pass, info='')=> tests.push({name, pass, info});
+      assert('Header exists', !!document.querySelector('header'));
+      assert('Logo image present', !!document.querySelector('img[alt~="logo"]') || !!document.querySelector('img[src*="logo"]'));
+      assert('Services section exists', !!document.getElementById('services'));
+      assert('Policies section exists', !!document.getElementById('policies'));
+      assert('Back-to-top button wired', !!topBtn);
+      // Report
+      const passed = tests.filter(t=>t.pass).length;
+      const failed = tests.length - passed;
+      console.log(`CozyPaws UI smoke tests: ${passed}/${tests.length} passed`);
+      if(failed){ console.table(tests.filter(t=>!t.pass)); }
+    })();
+  })();
+  </script>
+</body>
+</html>
